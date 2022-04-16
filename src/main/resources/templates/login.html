@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>黑马旅游网-登录</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <!--导入angularJS文件-->
+	<script th:src="@{/js/angular.min.js}"></script>
+	<!--导入jquery-->
+	<script th:src="@{/js/jquery-3.3.1.js}"></script>
+
+	<script>
+		/*进行表单效验
+            1.用户名：长度1~100位
+            2.密码：长度1~32位
+            3.验证码：长度1~4位
+         */
+		function checkUsername() {
+			//符合要求则返回true
+			var username = $("#username").val();//拿到用户名的值
+			var reg_username = /^\w{1,100}$/;//定义正则，6~20位即可
+			var flag = reg_username.test(username)//检查文本是否符合
+			if(flag){
+				$("#username").css("border","");//合法，则css样式不做改变
+			}else {
+				$("#username").css("border","1px solid red");//不合法，做出红色提醒
+			}
+			return flag;
+		}
+		function checkPassword() {
+			//符合要求则返回true
+			var password = $("#password").val();//拿到用户名的值
+			var reg_password = /^\w{1,32}$/;//定义正则，8~20位即可
+			var flag = reg_password.test(password)//检查文本是否符合
+			if(flag){
+				$("#password").css("border","");//合法，则css样式不做改变
+			}else {
+				$("#password").css("border","1px solid red");//不合法，做出红色提醒
+			}
+			return flag;
+		}
+
+		function checkCode() {
+			//1.获取值
+			var code = $("#check").val();
+			//2.定义正则
+			var reg_code = /^\w{1,4}$/;
+			//3.判断
+			var flag = reg_code.test(code);
+			//4.给出提示信息
+			if (flag){
+				$("#check").css("border","")
+			}else {
+				$("#check").css("border","1px solid red");
+			}
+			return flag;
+		}
+		$(function () {
+			//登录表单提交时，前台进行数据效验
+			$("#loginForm").submit(function () {
+				return checkUsername() && checkPassword() && checkCode();
+			});
+			//某个组件失去焦点时，进行效验
+			$("#username").blur(checkUsername);
+			$("#password").blur(checkPassword);
+			$("#check").blur(checkCode);
+		})
+
+	</script>
+</head>
+
+<body>
+	<!--引入头部-->
+	<div th:replace="common :: #header"></div>
+	<!--引入导航栏-->
+	<div th:replace="common :: #navitem"></div>
+
+    <section id="login_wrap">
+        <div class="fullscreen-bg" style="background: url(images/login_bg.png);height: 532px;">
+        	
+        </div>
+        <div class="login-box">
+        	<div class="title">
+        		<img src="images/login_logo.png" alt="">
+        		<span>欢迎登录黑马旅游账户</span>
+        	</div>
+        	<div class="login_inner">
+				
+				<!--登录错误提示消息-->
+        		<div id="errorMsg" class="alert alert-danger" th:text="${msg}"></div>
+				<form id="loginForm" th:action="@{/loginUser}" method="post" accept-charset="utf-8" >
+        			<input type="hidden" name="action" value="login"/>
+					<input id="username" name="username" type="text" placeholder="请输入账号" autocomplete="off">
+        			<input id="password" name="password" type="text" placeholder="请输入密码" autocomplete="off">
+        			<div class="verify">
+					<input id="check" name="check" type="text" placeholder="请输入验证码" autocomplete="off">
+					<span><img src="checkCode" alt="" onclick="changeCheckCode(this)"></span>
+					<script type="text/javascript">
+						//图片点击事件
+						function changeCheckCode(img) {
+							img.src="checkCode?"+new Date().getTime();
+						}
+					</script>
+			</div>
+			<div class="submit_btn">
+        				<button type="submit">登录</button>
+        				<div class="auto_login">
+        					<input type="checkbox" name="" class="checkbox">
+        					<span>自动登录</span>
+        				</div>        				
+        			</div>        			       		
+        		</form>
+        		<div class="reg">没有账户？<a th:href="@{/register}">立即注册</a></div>
+        	</div>
+        </div>
+    </section>
+
+	<!--导入底部-->
+	<div th:replace="common :: #footer"></div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

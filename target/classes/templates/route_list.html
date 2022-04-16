@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>黑马旅游-搜索</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
+    <script th:src="@{/js/jquery-3.3.1.js}"></script>
+</head>
+<body>
+<!--引入头部-->
+<div th:replace="common :: #header"></div>
+<!--引入导航栏-->
+<div th:replace="common :: #navitem"></div>
+
+
+    <div class="page_one">
+        <div class="contant">
+            <div class="crumbs">
+                <img src="images/search.png" alt="">
+                <p>黑马旅行><span>搜索结果</span></p>
+            </div>
+            <div class="xinxi clearfix">
+                <div class="left">
+                    <div class="header">
+                        <span>商品信息</span>
+                        <span class="jg">价格</span>
+                    </div>
+                    <ul>
+                        <li th:each="routelist : ${routeList.records}">
+                            <div class="img"><img th:src="@{'/'+${routelist.getRimage()}}" alt="" width="299px"></div>
+                            <div class="text1">
+                                <p th:text="${routelist.getRname()}">【减100元 含除夕/春节出发】广州增城三英温泉度假酒店/自由行套票</p>
+                                <br/>
+                                <p th:text="${routelist.getRouteIntroduce()}">1-2月出发，网付立享￥1099/2人起！爆款位置有限，抢完即止！</p>
+                            </div>
+                            <div class="price">
+                                <p class="price_num">
+                                    <span>&yen;</span>
+                                    <span th:text="${routelist.getPrice()}">299</span>
+                                    <span>起</span>
+                                </p>
+                                <p><a th:href="@{/route_detail(rname=${selectRname},pn=${routeList.current},rid=${routelist.getRid()})}">查看详情</a></p>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <div class="page_num_inf">
+                        <i></i> 当前
+                        <span>[[${routeList.current}]]</span>页，共<span>[[${routeList.pages}]]</span>页<span>[[${routeList.total}]]</span>条
+                    </div>
+                    <div class="pageNum">
+                        <!--在此设置分页工具栏显示条数，最多显示9个-->
+                        <ul  th:with="begin=((${routeList.current}-4)<1 ? 1:(${routeList.current}-4)),end=((${routeList.current}+4)>${routeList.pages} ? ${routeList.pages}:(${routeList.current}+4))">
+                            <!--首页-->
+                            <li>
+                                <a th:href="@{/route_list(cid=${routeListId},rname=${selectRname},pn=1)}">
+                                    首页
+                                </a>
+                            </li>
+                            <!--上一页-->
+                            <li class="threeword" th:if="${routeList.hasPrevious()}">
+                                <a th:href="@{/route_list(cid=${routeListId},rname=${selectRname},pn=${routeList.current-1})}">
+                                    上一页
+                                </a>
+                            </li>
+                            <!--当前页-->
+                            <li th:each="num:${#numbers.sequence(begin,end)}"
+                                th:class="${num==routeList.current?'actice':''}">
+                                <a th:href="@{/route_list(cid=${routeListId},rname=${selectRname},pn=${num})}">
+                                    [[${num}]]
+                                </a>
+                            </li>
+                            <!--下一页-->
+                            <li class="threeword" th:if="${routeList.hasNext()}">
+                                <a th:href="@{/route_list(cid=${routeListId},rname=${selectRname},pn=${routeList.current+1})}">
+                                    下一页
+                                </a>
+                            </li>
+                            <!--末页-->
+                            <li class="threeword">
+                                <a th:href="@{/route_list(cid=${routeListId},rname=${selectRname},pn=${routeList.getPages()})}">
+                                    末页
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="top">
+                        <div class="hot">HOT</div>
+                        <span>热门推荐</span>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="left"><img src="images/04-search_09.jpg" alt=""></div>
+                            <div class="right">
+                                <p>清远新银盏温泉度假村酒店/自由行套...</p>
+                                <p>网付价<span>&yen;<span>899</span>起</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="left"><img src="images/04-search_09.jpg" alt=""></div>
+                            <div class="right">
+                                <p>清远新银盏温泉度假村酒店/自由行套...</p>
+                                <p>网付价<span>&yen;<span>899</span>起</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="left"><img src="images/04-search_09.jpg" alt=""></div>
+                            <div class="right">
+                                <p>清远新银盏温泉度假村酒店/自由行套...</p>
+                                <p>网付价<span>&yen;<span>899</span>起</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="left"><img src="images/04-search_09.jpg" alt=""></div>
+                            <div class="right">
+                                <p>清远新银盏温泉度假村酒店/自由行套...</p>
+                                <p>网付价<span>&yen;<span>899</span>起</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="left"><img src="images/04-search_09.jpg" alt=""></div>
+                            <div class="right">
+                                <p>清远新银盏温泉度假村酒店/自由行套...</p>
+                                <p>网付价<span>&yen;<span>899</span>起</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--导入底部-->
+    <div th:replace="common :: #footer"></div>
+
+</body>
+
+</html>

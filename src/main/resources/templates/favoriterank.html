@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>收藏排行榜</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/ranking-list.css}">
+        <script th:src="@{/js/jquery-3.3.1.js}"></script>
+    </head>
+    <body>
+    <!--引入头部-->
+        <div th:replace="common :: #header"></div>
+        <!--引入导航栏-->
+        <div th:replace="common :: #navitem"></div>
+
+        <div class="contant">
+            <div class="shaixuan">
+                <span>线路名称</span>
+                <input type="text" id="rname">
+                <span>金额</span>
+                <input type="text" id="low">~<input type="text" id="high">
+                <button onclick="favoriteRankButton();">搜索</button>
+<!--                <script th:inline="javascript">-->
+<!--                    function favoriteRankButton() {-->
+<!--                        var rname = $("#rname").val();-->
+<!--                        var low = $("#low").val();-->
+<!--                        var high = $("#high").val();-->
+<!--                        location.href="/favoriterank?rname="+rname+"&low="+low+"&high="+high;-->
+<!--                    }-->
+<!--                </script>-->
+            </div>
+            <div class="list clearfix">
+                <ul>
+                    <li th:each="route,stat : ${routeList.records}">
+                        <span class="num one" th:text="${stat.count}">1</span>
+                        <a th:href="@{/route_detail(rid=${route.getRid()})}"><img th:src="@{'/'+${route.getRimage()}}" alt=""></a>
+                        <h4><a th:href="@{/route_detail(rid=${route.getRid()})}" th:text="${route.getRname()}">【尾单特卖】全国-曼谷6-7天自由行 泰国出境旅游 特价往6-7天自由行 泰国出境旅游 特价往..</a></h4>
+                        <p>
+                            <b class="price">&yen;<span th:text="${route.getPrice()}">899</span>起</b>
+                            <span class="shouchang">已有人收藏<span th:text="${route.getCount()}">450</span>次</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="pageNum">
+                <ul th:with="begin=((${routeList.current}-4)<1 ? 1:(${routeList.current}-4)),end=((${routeList.current}+4)>${routeList.pages} ? ${routeList.pages}:(${routeList.current}+4))">
+                    <li><a th:href="@{/favoriterank(pn=1)}">首页</a></li>
+                    <li class="threeword" th:if="${routeList.hasPrevious()}"><a th:href="@{/favoriterank(pn=${routeList.current-1})}">上一页</a></li>
+                    <li th:each="num:${#numbers.sequence(begin,end)}"
+                        th:class="${num==routeList.current?'actice':''}">
+                        <a th:href="@{/favoriterank(pn=${num})}">
+                            [[${num}]]
+                        </a>
+                    </li>
+
+                    <li class="threeword" th:if="${routeList.hasNext()}"><a th:href="@{/favoriterank(pn=${routeList.current+1})}">下一页</a></li>
+                    <li class="threeword"><a th:href="@{/favoriterank(pn=${routeList.getPages()})}">末页</a></li>
+                </ul>
+            </div>
+        </div>
+    	
+         <!--导入底部-->
+        <div th:replace="common :: #footer"></div>
+
+    </body>
+</html>

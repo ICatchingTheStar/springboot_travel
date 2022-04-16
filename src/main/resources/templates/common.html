@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 尾部 start-->
+<div id="footer">
+    <div class="why_select">
+        <dl>
+            <dt class="fl">
+                <img th:src="@{/images/icon_1.jpg}" alt="">
+            </dt>
+            <dd>
+                <h1>产品齐全</h1>
+                <h2>产品全自主选，随心买</h2>
+            </dd>
+        </dl>
+        <dl>
+            <dt class="fl">
+                <img th:src="@{/images/icon_2.jpg}" alt="">
+            </dt>
+            <dd>
+                <h1>便利快捷</h1>
+                <h2>24小时不打烊，随时买</h2>
+            </dd>
+        </dl>
+        <dl>
+            <dt class="fl">
+                <img th:src="@{/images/icon_3.jpg}" alt="">
+            </dt>
+            <dd>
+                <h1>安全支付</h1>
+                <h2>知名支付工具，放心买</h2>
+            </dd>
+        </dl>
+        <dl>
+            <dt class="fl">
+                <img th:src="@{/images/icon_4.jpg}" alt="">
+            </dt>
+            <dd style="margin-right:0px;">
+                <h1>贴心服务</h1>
+                <h2>客服全年无休，安心买</h2>
+            </dd>
+        </dl>
+    </div>
+    <div class="company">
+        <p>江苏传智播客教育科技股份有限公司 版权所有Copyright 2006-2018, All Rights Reserved 苏ICP备16007882</p>
+    </div>
+</div>
+<!--尾部 end-->
+
+
+<!-- 头部 start -->
+<div id="header">
+    <div class="top_banner">
+        <img th:src="@{/images/top_banner.jpg}" alt="">
+    </div>
+    <div class="shortcut">
+        <!-- 未登录状态  -->
+        <div class="login_out">
+            <a th:href="@{/login}">登录</a>
+            <a th:href="@{/register}">注册</a>
+        </div>
+        <!-- 登录状态  -->
+        <div class="login">
+            <span th:if="${session.loginUser} != null" th:text="'欢迎回来，'+${session.loginUser.name}"></span>
+            <a th:if="${session.loginUser} != null" th:href="@{/myfavorite}" class="collection">我的收藏</a>
+            <a  th:if="${session.loginUser} != null" th:href="@{/exit}" onclick="return confirm('确定退出？');">退出</a>
+        </div>
+    </div>
+    <div class="header_wrap">
+        <div class="topbar">
+            <div class="logo">
+                <a th:href="@{/}"><img th:src="@{/images/logo.jpg}" alt=""></a>
+            </div>
+            <div class="search">
+                <input name="" th:value="${selectRname}" id="search_input" type="text" placeholder="请输入路线名称" class="search_input" autocomplete="off">
+                <a href="javascript:;" id="search_button" class="search-button"  onclick="search_button();">搜索</a>
+                <script th:inline="javascript">
+                    function search_button() {
+
+                        var cid = [[${routeListId}]];
+                        var rname = $("#search_input").val();
+                        if (rname.length>0){
+                            location.href="/route_list?cid="+cid+"&rname="+rname;
+                        }
+                    }
+                </script>
+            </div>
+            <div class="hottel">
+                <div class="hot_pic">
+                    <img th:src="@{/images/hot_tel.jpg}" alt="">
+                </div>
+                <div class="hot_tel">
+                    <p class="hot_time">客服热线(9:00-6:00)</p>
+                    <p class="hot_num">400-618-9090</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 头部 end -->
+    <!-- 首页导航 -->
+
+</div>
+<!--头部 end-->
+
+
+<!-- 首页导航 -->
+<div id="navitem">
+    <ul class="nav">
+        <li class="nav-active"><a th:href="@{/index}">首页</a></li>
+
+        <!--从导航栏目表里升序取出数据，并在此排列-->
+        <li th:each="categorylist : ${session.categoryList}">
+            <!--当用户点击对应的分类栏目时，会根据栏目的cid去分类查找对应的旅游路线-->
+            <a th:href="@{/route_list(cid=${categorylist.getCid()} )}" th:text="${categorylist.getCname()}">门票</a>
+        </li>
+<!--        <li><a th:href="@{/route_list/2}">酒店</a></li>-->
+<!--        <li><a th:href="@{/route_list/3}">香港车票</a></li>-->
+<!--        <li><a th:href="@{/route_list/4}">出境游</a></li>-->
+<!--        <li><a th:href="@{/route_list/5}">国内游</a></li>-->
+<!--        <li><a th:href="@{/route_list/6}">港澳游</a></li>-->
+<!--        <li><a th:href="@{/route_list/7}">抱团定制</a></li>-->
+<!--        <li><a th:href="@{/route_list/8}">全球自由行</a></li>-->
+
+
+        <li><a th:href="@{/favoriterank}">收藏排行榜</a></li>
+    </ul>
+</div>
+<!--导航 end-->
+</body>
+</html>

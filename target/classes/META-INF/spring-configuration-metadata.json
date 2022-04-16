@@ -1,0 +1,80 @@
+{
+  "groups": [
+    {
+      "name": "travel.swagger",
+      "type": "com.travel.mybootdemo.config.SwaggerProperties",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties"
+    },
+    {
+      "name": "travel.swagger.contact",
+      "type": "com.travel.mybootdemo.config.SwaggerProperties$Contact",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "travel.swagger.base-package",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties",
+      "defaultValue": "com.travel.mybootdemo"
+    },
+    {
+      "name": "travel.swagger.base-path",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties"
+    },
+    {
+      "name": "travel.swagger.contact.email",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties$Contact",
+      "defaultValue": "wstimt@163.com"
+    },
+    {
+      "name": "travel.swagger.contact.name",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties$Contact",
+      "defaultValue": "travel"
+    },
+    {
+      "name": "travel.swagger.contact.url",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties$Contact",
+      "defaultValue": "8080"
+    },
+    {
+      "name": "travel.swagger.description",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties",
+      "defaultValue": "在线文档"
+    },
+    {
+      "name": "travel.swagger.docket",
+      "type": "java.util.Map<java.lang.String,com.travel.mybootdemo.config.SwaggerProperties$DocketInfo>",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties"
+    },
+    {
+      "name": "travel.swagger.exclude-path",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties"
+    },
+    {
+      "name": "travel.swagger.group",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties",
+      "defaultValue": ""
+    },
+    {
+      "name": "travel.swagger.title",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties",
+      "defaultValue": "在线文档"
+    },
+    {
+      "name": "travel.swagger.version",
+      "type": "java.lang.String",
+      "sourceType": "com.travel.mybootdemo.config.SwaggerProperties",
+      "defaultValue": "1.0"
+    }
+  ],
+  "hints": []
+}

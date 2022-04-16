@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:mysql:///boot_travel?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jdbc:
+    template:
+      query-timeout: 3000
+  mail:
+    host: smtp.163.com
+    default-encoding: utf-8
+    username: wstimt@163.com
+    password:
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            required: true
+          timeout: 10000
+          connectiontimeout: 10000
+          writetimeout: 10000
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+travel:
+  swagger:
+    enabled: true #是否启用swagger
+    title: travel模块
+    base-package: com.travel.mybootdemo.controller

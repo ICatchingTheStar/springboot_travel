@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mybootdemo.mapper.UserMapper">
+    <!--    void insertRegister(User user);-->
+    <!--    void updateStatus(String code);-->
+    <insert id="insertRegister">
+        Insert into tab_user values (NULL,#{user.username},#{user.password},#{user.name},#{user.birthday},#{user.sex},#{user.telephone},#{user.email},#{user.status},#{user.code});
+    </insert>
+    <update id="updateStatus">
+        update tab_user u1 SET u1.`status`='Y' where u1.`code`=#{code};
+    </update>
+</mapper>
