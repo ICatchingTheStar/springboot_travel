@@ -11,7 +11,7 @@ spring:
     host: smtp.163.com
     default-encoding: utf-8
     username: wstimt@163.com
-    password: imt_123K
+    password:
     properties:
       mail:
         smtp:
@@ -26,5 +26,5 @@ mybatis-plus:
 travel:
   swagger:
     enabled: true #是否启用swagger
-    title: test模块
+    title: travel模块
     base-package: com.travel.mybootdemo.controller
